@@ -16,7 +16,9 @@ import java.util.Set;
  * Would implement instead of extend java.util.Properties if it was an interface.
  */
 public abstract class DelegatingProperties extends Properties {
-    protected abstract Properties getDelegate();
+	private static final long serialVersionUID = 1L;
+
+	protected abstract Properties getDelegate();
 
     public void load(InputStream inStream) throws IOException {
         getDelegate().load(inStream);
@@ -30,12 +32,16 @@ public abstract class DelegatingProperties extends Properties {
         getDelegate().list(out);
     }
 
-    public Enumeration propertyNames() {
+    public Enumeration<?> propertyNames() {
         return getDelegate().propertyNames();
     }
 
     public void save(OutputStream out, String header) {
-        getDelegate().save(out, header);
+        try {
+			getDelegate().store(out, header);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
     }
 
     public void store(OutputStream out, String header) throws IOException {
@@ -94,27 +100,27 @@ public abstract class DelegatingProperties extends Properties {
         return getDelegate().toString();
     }
 
-    public Collection values() {
+    public Collection<Object> values() {
         return getDelegate().values();
     }
 
-    public Enumeration elements() {
+    public Enumeration<Object> elements() {
         return getDelegate().elements();
     }
 
-    public Enumeration keys() {
+    public Enumeration<Object> keys() {
         return getDelegate().keys();
     }
 
-    public void putAll(Map t) {
+    public void putAll(Map<?, ?> t) {
         getDelegate().putAll(t);
     }
 
-    public Set entrySet() {
+    public Set<java.util.Map.Entry<Object, Object>> entrySet() {
         return getDelegate().entrySet();
     }
 
-    public Set keySet() {
+    public Set<Object> keySet() {
         return getDelegate().keySet();
     }
 

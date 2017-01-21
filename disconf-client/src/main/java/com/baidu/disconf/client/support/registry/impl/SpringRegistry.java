@@ -28,7 +28,7 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext = applicationContext;
+    	SpringRegistry.applicationContext = applicationContext;
     }
 
     @Override
@@ -92,7 +92,8 @@ public class SpringRegistry implements Registry, ApplicationContextAware {
         return applicationContext.getBeansOfType(type);
     }
 
-    protected <T> T getTargetObject(Object proxy, Class<T> targetClass) throws Exception {
+    @SuppressWarnings("unchecked")
+	protected <T> T getTargetObject(Object proxy, Class<T> targetClass) throws Exception {
         if (AopUtils.isJdkDynamicProxy(proxy)) {
             return (T) ((Advised) proxy).getTargetSource().getTarget();
         } else if (AopUtils.isCglibProxy(proxy)) {

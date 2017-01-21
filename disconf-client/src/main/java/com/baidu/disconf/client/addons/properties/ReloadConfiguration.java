@@ -9,7 +9,7 @@ import java.util.List;
 public class ReloadConfiguration implements Runnable {
     List<ReconfigurableBean> reconfigurableBeans;
 
-    public void setReconfigurableBeans(List reconfigurableBeans) {
+    public void setReconfigurableBeans(List<?> reconfigurableBeans) {
         // early type check, and avoid aliassing
         this.reconfigurableBeans = new ArrayList<ReconfigurableBean>();
         for (Object o : reconfigurableBeans) {

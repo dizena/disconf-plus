@@ -174,7 +174,8 @@ public class ReflectionScanStatic implements ScanStaticStrategy {
     /**
      * 扫描基本信息
      */
-    private ScanStaticModel scanBasicInfo(List<String> packNameList) {
+    @SuppressWarnings("unchecked")
+	private ScanStaticModel scanBasicInfo(List<String> packNameList) {
 
         ScanStaticModel scanModel = new ScanStaticModel();
 

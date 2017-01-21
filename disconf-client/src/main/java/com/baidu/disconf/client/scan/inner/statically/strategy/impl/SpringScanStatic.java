@@ -13,21 +13,29 @@ import com.baidu.disconf.client.scan.inner.statically.strategy.ScanStaticStrateg
  */
 public class SpringScanStatic implements ScanStaticStrategy {
 
-    private ApplicationContext context;
-    private DefaultListableBeanFactory factory;
+	private ApplicationContext context;
+	private DefaultListableBeanFactory factory;
 
-    /**
-     * 构造函数
-     */
-    public SpringScanStatic(ApplicationContext context) {
-        this.context = context;
-    }
+	/**
+	 * 构造函数
+	 */
+	public SpringScanStatic(ApplicationContext context) {
+		this.context = context;
+	}
 
-    @Override
-    public ScanStaticModel scan(List<String> packNameList) {
+	@Override
+	public ScanStaticModel scan(List<String> packNameList) {
 
-        factory = (DefaultListableBeanFactory) context.getAutowireCapableBeanFactory();
-        return null;
-    }
+		factory = (DefaultListableBeanFactory) context.getAutowireCapableBeanFactory();
+		return null;
+	}
+
+	public DefaultListableBeanFactory getFactory() {
+		return factory;
+	}
+
+	public void setFactory(DefaultListableBeanFactory factory) {
+		this.factory = factory;
+	}
 
 }

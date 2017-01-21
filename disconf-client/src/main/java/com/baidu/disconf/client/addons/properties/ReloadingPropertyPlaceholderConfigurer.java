@@ -64,7 +64,8 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
      *
      * @throws BeanDefinitionStoreException
      */
-    protected String parseStringValue(String strVal, Properties props, Set visitedPlaceholders)
+    @SuppressWarnings("deprecation")
+	protected String parseStringValue(String strVal, Properties props, Set<?> visitedPlaceholders)
             throws BeanDefinitionStoreException {
 
         DynamicProperty dynamic = null;
@@ -218,7 +219,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
                     currentBeanName = beanName;
                     currentPropertyName = propertyName;
                     try {
-                        newValue = parseStringValue(unparsedValue, newProperties, new HashSet());
+                        newValue = parseStringValue(unparsedValue, newProperties, new HashSet<Object>());
                     } finally {
                         currentBeanName = null;
                         currentPropertyName = null;
@@ -454,7 +455,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
         }
 
         protected String resolveStringValue(String strVal) throws BeansException {
-            return parseStringValue(strVal, this.props, new HashSet());
+            return parseStringValue(strVal, this.props, new HashSet<Object>());
         }
     }
 
@@ -471,7 +472,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
 
         @Override
         public String resolveStringValue(String strVal) throws BeansException {
-            return parseStringValue(strVal, this.props, new HashSet());
+            return parseStringValue(strVal, this.props, new HashSet<Object>());
         }
     }
 
@@ -488,7 +489,7 @@ public class ReloadingPropertyPlaceholderConfigurer extends DefaultPropertyPlace
         setPropertiesArray(new Properties[] {properties});
     }
 
-    public void setPropertiesArray(Properties[] propertiesArray) {
+    public void setPropertiesArray(Properties... propertiesArray) {
         this.propertiesArray = propertiesArray;
         super.setPropertiesArray(propertiesArray);
     }

@@ -12,12 +12,14 @@ import org.slf4j.LoggerFactory;
  */
 public class ReloadablePropertiesBase extends DelegatingProperties implements ReloadableProperties {
 
-    protected static final Logger LOGGER = LoggerFactory.getLogger(ReloadablePropertiesBase.class);
+	private static final long serialVersionUID = 1L;
+
+	protected static final Logger LOGGER = LoggerFactory.getLogger(ReloadablePropertiesBase.class);
 
     private List<IReloadablePropertiesListener> listeners = new ArrayList<IReloadablePropertiesListener>();
     private Properties internalProperties;
 
-    public void setListeners(List listeners) {
+    public void setListeners(List<IReloadablePropertiesListener> listeners) {
         this.listeners = listeners;
     }
 
